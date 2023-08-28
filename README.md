@@ -1,6 +1,6 @@
 # Bookmarks API
 
-A bookmark management API built with **[Nest JS](https://nestjs.com/)**. This study project is a dive into the best practices of **[Node JS](https://nodejs.org/)** back-end technologies. It leverages **[Docker and Docker Compose](https://www.docker.com/)** for containerized databases, employs **[Prisma](https://www.prisma.io/)** as the ORM for streamlined database operations, and integrates **[JWT](https://jwt.io/)** for secure authentication.
+A bookmark management API built with **[Nest JS](https://nestjs.com/)** and **[TypeScript](https://www.typescriptlang.org/)**. This study project is a dive into the best practices of **[Node JS](https://nodejs.org/)** back-end technologies. It leverages **[Docker and Docker Compose](https://www.docker.com/)** for containerized databases, employs **[Prisma](https://www.prisma.io/)** as the ORM for streamlined database operations, and integrates **[JWT](https://jwt.io/)** for secure authentication.
 
 ## Installation
 
