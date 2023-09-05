@@ -7,7 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// The Prisma models serves as a blueprint, specifying the fields and their types for the corresponding database table.
 model User {
   id Int @id @default(autoincrement())
   createdAt DateTime @default(now())
@@ -17,10 +16,8 @@ model User {
   firstName String?
   lastName String?
   
-  // The line below links the Bookmark and User models, and the '[]' indicates that a User can have multiple Bookmarks.
   bookmarks Bookmark[]
 
-  // this renames the model when its saved in DB
   @@map("users")
 }
 
@@ -33,8 +30,6 @@ model Bookmark {
   link String
 
   userId Int
-  // The @relation establishes a relationship between the Bookmark and User models.
-  // The 'fields: [userId], references: [id]' notation links both models using the same 'id'.
   user User @relation(fields: [userId], references: [id])
 
   @@map("bookmarks")

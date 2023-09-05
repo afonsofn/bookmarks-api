@@ -16,7 +16,6 @@ describe('App e2e', () => {
       imports: [AppModule],
     }).compile();
 
-    // Mocking the app module to simulate the behavior in 'main.ts'.
     app = moduleRef.createNestApplication();
 
     app.useGlobalPipes(
@@ -30,7 +29,6 @@ describe('App e2e', () => {
 
     prisma = app.get(PrismaService);
 
-    // Making sure that the db will be empty
     await prisma.cleanDb();
 
     pactum.request.setBaseUrl('http://localhost:3333');

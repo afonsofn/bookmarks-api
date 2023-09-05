@@ -17,8 +17,6 @@ export class JwtStrategy extends PassportStrategy(Strategy, JWT_STRATEGY) {
     });
   }
 
-  // When using the strategy, we must implement the 'validate' method to handle the request's payload.
-  // Anything returned here will be accessible via 'req.user' in the request
   async validate(payload: { sub: number; email: string }) {
     const user = await this.prisma.user.findUnique({
       where: {

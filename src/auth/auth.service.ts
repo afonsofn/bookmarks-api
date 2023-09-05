@@ -23,15 +23,12 @@ export class AuthService {
     password,
   }: AuthDto): Promise<{ access_token: string }> {
     try {
-      // generating the password hash
       const hash = await argon.hash(password);
 
-      // saving the new user in db
       const user = await this.prisma.user.create({
         data: { email, hash },
       });
 
-      // returning the jwt to authorize the user
       return this.signToken(user.id, user.email);
     } catch (error) {
       if (error.name === 'PrismaClientValidationError') {
@@ -39,7 +36,6 @@ export class AuthService {
       }
 
       if (error instanceof PrismaClientKnownRequestError) {
-        // error.code === 'P2002' indicates an attempt to create a new record with a unique field value that already exists.
         if (error.code === 'P2002') {
           throw new ForbiddenException('Credential taken');
         }
@@ -51,19 +47,15 @@ export class AuthService {
 
   async signin({ email, password }: AuthDto) {
     try {
-      // find the user by email
       const user = await this.prisma.user.findUnique({ where: { email } });
       if (!user) throw new ForbiddenException('Credentials incorrect');
 
-      // compare password
       const pwMatches = await argon.verify(user.hash, password);
       if (!pwMatches) throw new ForbiddenException('Credentials incorrect');
 
-      // returning the jwt to authorize the user
       return this.signToken(user.id, user.email);
     } catch (error) {
       if (error instanceof PrismaClientKnownRequestError) {
-        // error.code === 'P2002' indicates an attempt to create a new record with a unique field value that already exists.
         if (error.code === 'P2002') {
           throw new ForbiddenException('Credential taken');
         }
